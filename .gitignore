@@ -1,0 +1,44 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*.so
+
+# Virtual environment
+env/
+venv/
+.myenv/
+*.env
+*.venv
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints
+
+# VSCode and PyCharm settings
+.vscode/
+.idea/
+
+# Mac OS
+.DS_Store
+
+# Datasets
+data/
+
+# Model files / weights (optional - only ignore if you don't want to commit them)
+*.pt
+*.bin
+
+# Tokenizer and data files (if large or sensitive)
+tokenizer/*
+data/*
+
+# Logs and outputs
+*.log
+*.out
+*.tmp
+
+# Python environment metadata
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Misc
+*.swp
