@@ -2,7 +2,7 @@ import torch
 from torch.utils.data import Dataset, DataLoader
 import torch.nn.functional as F
 from tokenizers import ByteLevelBPETokenizer
-#from tokenizers import Tokenizer
+from tokenizers import ByteLevelBPETokenizer
 from model.minigpt import MiniGPT
 from tqdm import tqdm
 import os
@@ -12,10 +12,7 @@ tokenizer = ByteLevelBPETokenizer()
 tokenizer.train(files=["data/your_data.txt"], vocab_size=8000, min_frequency=2)
 os.makedirs("tokenizer", exist_ok=True)
 tokenizer.save_model("tokenizer")
-
-from tokenizers import ByteLevelBPETokenizer
 tokenizer = ByteLevelBPETokenizer("tokenizer/vocab.json", "tokenizer/merges.txt")
-#tokenizer = Tokenizer.from_file("tokenizer/tokenizer.json")
 
 # Prepare training data
 with open("data/your_data.txt", "r") as f:
