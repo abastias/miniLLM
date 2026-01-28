@@ -1,120 +1,64 @@
-# 🧠 Mini LLM
+# miniLLM (teaching edition)
 
-Build your own GPT-style language model (LLM) from scratch using PyTorch.  
-This project is designed to work efficiently on a Mac M CPU or any other machine with modest resources.
+A compact, educational **GPT-style (decoder-only)** language model in PyTorch.
 
----
+This repo is meant for **learning**: you can train a tiny model end-to-end (tokenizer → model → sampling),
+then inspect how generation decisions are made.
 
-## 🚀 Features
+## What’s new in this update
 
-- ✅ Train your own tokenizer (BPE)
-- ✅ Implement a decoder-only Transformer (GPT-style)
-- ✅ Generate text using top-k sampling
-- ✅ Interact with your model using a command-line chat interface
-- ✅ Run on Apple Silicon (`mps`) or CPU
-
----
-
-## 🗂️ Project Structure
-
-```
-mini_llm/
-├── README.md
-├── requirements.txt
-├── fundamentals.md
-├── train.py
-├── generate.py
-├── chat.py
-├── model/
-│   └── minigpt.py
-├── tokenizer/
-│   ├── vocab.json
-│   └── merges.txt
-├── data/
-│   └── your_data.txt      ← Your training dataset
-```
+- **True causal attention** (autoregressive mask) — not bidirectional
+- Cleaner project layout (`src/`) with reusable modules
+- CLI chat with optional **sampling details**
+- Optional **Gradio UI** (sliders + “show top tokens”)
 
 ---
 
-## 📥 Dataset Required
+## Quickstart
 
-Before training, you must add your own dataset in plain text format.
-
-I recommend starting with:
-
+### 1) Install
 ```bash
-curl -o data/your_data.txt https://raw.githubusercontent.com/karpathy/char-rnn/master/data/tinyshakespeare/input.txt
-```
-
-Or you can use any `.txt` file of your choosing. The better and more varied the text, the smarter your model.
-
----
-
-## ⚙️ Setup Instructions
-
-### 1. Create Python Environment
-
-```bash
-python3.11 -m venv myllm-env
-source myllm-env/bin/activate
-```
-
-### 2. Install Dependencies
-
-```bash
+python -m venv .venv
+source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
----
-
-## 🏋️‍♂️ Train the Model
-
-```bash
-python train.py
+### 2) Put training text here
+Create a plain text file:
+```
+data/your_data.txt
 ```
 
-This will:
-- Train a tokenizer using your dataset
-- Train the transformer model
-- Save weights to `minillm.pt`
-
----
-
-## ✍️ Generate Text
-
+### 3) Train tokenizer + model
 ```bash
-python generate.py
+python -m src.train --train_tokenizer --data data/your_data.txt
 ```
 
-Change the prompt inside the file or modify the function to generate different samples.
+This saves:
+- `tokenizer/vocab.json`, `tokenizer/merges.txt`
+- `minillm.pt` (model weights)
 
----
-
-## 💬 Chat with Your Model
-
+### 4) Chat (CLI)
 ```bash
-python chat.py --prompt "Tell me a joke"
+python -m src.chat_cli
+# or with details:
+python -m src.chat_cli --show_steps
 ```
 
-Or start an interactive loop:
-
+### 5) Friendly UI (Gradio)
 ```bash
-python chat.py
+python -m src.app_gradio
 ```
-
-Options:
-- `--temperature` (default: 1.0)
-- `--top_k` (default: 20)
-- `--tokens` (default: 50)
 
 ---
 
-## 🧪 Summary
+## Teaching notes
 
-This repo provides a compact and educational GPT-style model pipeline: from tokenizer, to training, to sampling and chat interaction.
+- **Temperature** controls randomness.
+- **Top‑k** restricts the model to the k most likely next tokens.
+- With `--show_steps` (CLI) or “Show sampling details” (UI) you can see
+  the **top token probabilities** at each generation step.
 
-Built with ❤️ to demystify LLMs.
-
+---
 
 by Alfonso G. Bastias, Ph.D.
-

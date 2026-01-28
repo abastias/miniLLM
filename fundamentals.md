@@ -194,3 +194,16 @@ Train longer (10+ epochs) for better performance.
 
 
 by Alfonso G. Bastias, Ph.D.
+
+---
+
+## 🆕 Update (2026): Causal Attention + Teaching UI
+
+This repo now includes a **true decoder-only GPT** implementation (see `src/model.py`) with a **causal mask** so tokens can only attend to the past.
+
+- Training entry point: `python -m src.train`
+- Generation utilities: `src/generate.py`
+- CLI chat: `python -m src.chat_cli`
+- Gradio UI: `python -m src.app_gradio`
+
+Try enabling the sampling details to discuss how **temperature** and **top‑k** change the model’s choices.
