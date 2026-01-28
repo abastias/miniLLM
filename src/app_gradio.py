@@ -28,7 +28,7 @@ def build_app(checkpoint: str = "minillm.pt", tokenizer_dir: str = "tokenizer") 
         return out, details
 
     with gr.Blocks(title="miniLLM — teaching UI") as demo:
-        gr.Markdown(f"# miniLLM\nRunning on **{device}**\n\nA teaching-focused GPT-style mini model.")
+        gr.Markdown(f"# miniLLM\nRunning on **{device}**\n\nA teaching-focused GPT-style mini model by Alfonso G. Bastias.")
         with gr.Row():
             prompt = gr.Textbox(label="Prompt", lines=4, value="Once upon a time,")
         with gr.Row():
